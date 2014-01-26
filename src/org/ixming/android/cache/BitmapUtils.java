@@ -11,6 +11,7 @@ import java.io.InputStream;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 
 /**
@@ -96,6 +97,9 @@ public class BitmapUtils {
 		return bitmap;
 	}
 	
+	/**
+	 * 从指定的FileOutputStream中（获取其对应的FileDescriptor）加载Bitmap
+	 */
 	public static Bitmap fromFileOutputStream(FileOutputStream out,
 			BitmapFactory.Options options, boolean closeStream) {
 		Bitmap bitmap = null;
@@ -109,6 +113,9 @@ public class BitmapUtils {
 		return bitmap;
 	}
 	
+	/**
+	 * 从指定的FileDescriptor中加载Bitmap
+	 */
 	public static Bitmap fromFileDescriptor(FileDescriptor fd,
 			BitmapFactory.Options options) {
 		Bitmap bitmap = null;
@@ -120,11 +127,30 @@ public class BitmapUtils {
 		return bitmap;
 	}
 	
+	/**
+	 * 计算Bitmap的内存占用
+	 * @param bm 要计算的对象
+	 * @return 内存大小，以byte为单位
+	 */
 	public static long calculateBitmapMemSize(Bitmap bm) {
 		if (null == bm) {
 			return 0L;
 		}
 		return bm.getRowBytes() * bm.getHeight();
+	}
+	
+	public static int byteCountOfPerPixel(Config config) {
+		switch (config) {
+		case ARGB_8888:
+			return 4;
+		case RGB_565:
+		case ARGB_4444:
+			return 2;
+		case ALPHA_8:
+			return 1;
+		default:
+			return BitmapConstants.defaultConfigBytesPerPixel();
+		}
 	}
 	
 	/**
@@ -156,7 +182,7 @@ public class BitmapUtils {
 		}
 	}
 	
-	private static void checkClose(Closeable close, boolean closeStream) {
+	/*package*/ static void checkClose(Closeable close, boolean closeStream) {
 		try {
 			if (closeStream) {
 				close.close();
