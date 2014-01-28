@@ -15,18 +15,24 @@ public class DisplayStrategyFactory {
 
 	private DisplayStrategyFactory() { }
 	
-	public static <T extends View>IDisplayStrategy<T> simpleFadeInInstance(
-			final IDisplayStrategy<T> other, final Drawable decor) {
-		return new IDisplayStrategy<T>() {
+	private static final Drawable TRANSPARENT_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
+	
+	public static IDisplayStrategy simpleFadeInInstance(
+			final IDisplayStrategy other, final Drawable decor, final boolean crossFade) {
+		return new IDisplayStrategy() {
 			@Override
-			public void display(T targetView, Drawable drawable) {
+			public void display(View view, Drawable drawable) {
 				Drawable defaultDecor = decor;
-				if (null == decor) {
-					defaultDecor = new ColorDrawable(Color.TRANSPARENT);
+				if (null == defaultDecor) {
+					defaultDecor = TRANSPARENT_DRAWABLE;
+				}
+				if (null == drawable) {
+					drawable = TRANSPARENT_DRAWABLE;
 				}
 				TransitionDrawable transitionDrawable = new TransitionDrawable(
 					new Drawable[]{ defaultDecor, drawable });
-				other.display(targetView, transitionDrawable);
+				transitionDrawable.setCrossFadeEnabled(crossFade);
+				other.display(view, transitionDrawable);
 				transitionDrawable.startTransition(500);
 			}
 		};

@@ -1,6 +1,8 @@
-package org.ixming.android.cache;
+package org.ixming.android.cache.utils;
 
 import java.util.LinkedList;
+
+import org.ixming.android.cache.BitmapConstants;
 
 import android.graphics.Bitmap;
 
@@ -20,7 +22,7 @@ public class BitmapTransition {
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// restrict the number of instances
 	private static final Object sPoolSync = new Object();
-	private static final int MAX_POOL_SIZE = 20;
+	private static final int MAX_POOL_SIZE = BitmapConstants.MAX_BITMAP_TRASITION_POOL_SIZE;
     private static LinkedList<BitmapTransition> sPool = new LinkedList<BitmapTransition>();
 	
     static BitmapTransition checkValue(BitmapTransition transition) {
@@ -35,8 +37,8 @@ public class BitmapTransition {
 			if (!sPool.isEmpty()) {
 				return sPool.remove().reset();
 			}
+			return new BitmapTransition();
 		}
-		return new BitmapTransition();
 	}
 
 	private ResizeMode mResizeMode;

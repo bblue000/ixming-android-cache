@@ -1,20 +1,16 @@
 package com.example.ixming_android_cache;
 
-import org.ixming.android.cache.BitmapTransition;
-import org.ixming.android.cache.BitmapUtils;
-import org.ixming.android.cache.DefaultBitmapDisplayer;
-import org.ixming.android.cache.PowerfulBitmapResizer;
+import org.ixming.android.cache.strategy.DisplayStrategyFactory;
+import org.ixming.android.cache.strategy.SimpleImageViewDisplayStrategy;
 import org.ixming.android.inject.InjectorUtils;
 import org.ixming.android.inject.annotation.ViewInject;
 import org.ixming.utils.NumberUtils;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity {
@@ -26,7 +22,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-//		SimpleMapPanel map = new SimpleMapPanel(this);
+		SimpleMapPanel map = new SimpleMapPanel(this);
 //		map.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		
 		setContentView(R.layout.activity_main);
@@ -34,14 +30,26 @@ public class MainActivity extends Activity {
 		InjectorUtils.defaultInstance().inject(this);
 		
 		new Handler().postDelayed(new Runnable() {
-			
 			@Override
 			public void run() {
-				new DefaultBitmapDisplayer().setBitmap(iv,
-						BitmapUtils.fromResource(getApplicationContext(), R.drawable.pic2, null));
+				DisplayStrategyFactory.simpleFadeInInstance(
+						SimpleImageViewDisplayStrategy.getInstance(), null, true)
+					.display(iv, getResources().getDrawable(R.drawable.pic2));
 			}
 		}, 3000L);
+		
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				DisplayStrategyFactory.simpleFadeInInstance(
+						SimpleImageViewDisplayStrategy.getInstance(),
+						getResources().getDrawable(R.drawable.pic2),
+						true)
+					.display(iv, null);
+			}
+		}, 6000L);
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

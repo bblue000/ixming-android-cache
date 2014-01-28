@@ -1,9 +1,12 @@
-package org.ixming.android.cache;
+package org.ixming.android.cache.utils;
 
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+
+import org.ixming.android.cache.BitmapConstants;
+import org.ixming.android.cache.LogUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -1,4 +1,6 @@
-package org.ixming.android.cache;
+package org.ixming.android.cache.utils;
+
+import org.ixming.android.cache.LogUtils;
 
 import android.graphics.Bitmap;
 

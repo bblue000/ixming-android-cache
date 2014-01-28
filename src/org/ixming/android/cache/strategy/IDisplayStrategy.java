@@ -20,11 +20,11 @@ import android.view.View;
  * 
  * @author Yin Yong
  */
-public interface IDisplayStrategy<V extends View> {
+public interface IDisplayStrategy {
 
 	/**
-	 * 将 {@code drawable} 设置到 {@code targetView} 中显示
+	 * 将 {@code drawable} 设置到相应的View中显示
 	 */
-	public void display(V targetView, Drawable drawable);
+	public void display(View view, Drawable drawable);
 	
 }

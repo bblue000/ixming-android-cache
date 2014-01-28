@@ -1,4 +1,4 @@
-package org.ixming.android.cache;
+package org.ixming.android.cache.utils;
 
 /**
  * 缩放/转变Bitmap的模式。

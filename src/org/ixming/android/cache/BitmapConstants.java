@@ -4,7 +4,11 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory.Options;
 
 public abstract class BitmapConstants {
-	BitmapConstants(){}
+	BitmapConstants() { }
+	
+	public static final int MAX_VIEW_STRATEGY_POOL_SIZE = 5;
+	public static final int MAX_IMAGEVIEW_STRATEGY_POOL_SIZE = 10;
+	public static final int MAX_BITMAP_TRASITION_POOL_SIZE = 20;
 	
 	/**
 	 * 应用中使用的Bitmap配置
