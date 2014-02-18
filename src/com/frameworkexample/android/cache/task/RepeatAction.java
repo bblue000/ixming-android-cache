@@ -1,4 +1,4 @@
-package org.ixming.android.cache.task;
+package com.frameworkexample.android.cache.task;
 
 /**
  * 

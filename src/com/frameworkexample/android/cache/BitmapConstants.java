@@ -1,4 +1,4 @@
-package org.ixming.android.cache;
+package com.frameworkexample.android.cache;
 
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory.Options;

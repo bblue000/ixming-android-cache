@@ -1,10 +1,10 @@
-package org.ixming.android.cache.task;
+package com.frameworkexample.android.cache.task;
 
 import java.lang.ref.WeakReference;
 
-import org.ixming.android.cache.BitmapConstants;
-import org.ixming.android.cache.utils.BitmapTransition;
-import org.ixming.android.cache.utils.PowerfulBitmapResizer;
+import com.frameworkexample.android.cache.BitmapConstants;
+import com.frameworkexample.android.cache.utils.BitmapTransition;
+import com.frameworkexample.android.cache.utils.PowerfulBitmapResizer;
 
 import android.content.Context;
 import android.graphics.Bitmap;

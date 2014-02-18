@@ -1,8 +1,8 @@
-package org.ixming.android.cache.task;
+package com.frameworkexample.android.cache.task;
 
-import org.ixming.android.cache.strategy.BlankDisplayStrategy;
-import org.ixming.android.cache.strategy.IDisplayStrategy;
-import org.ixming.android.cache.utils.BitmapTransition;
+import com.frameworkexample.android.cache.strategy.BlankDisplayStrategy;
+import com.frameworkexample.android.cache.strategy.IDisplayStrategy;
+import com.frameworkexample.android.cache.utils.BitmapTransition;
 
 import android.graphics.drawable.Drawable;
 

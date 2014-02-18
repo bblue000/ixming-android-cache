@@ -1,12 +1,12 @@
-package org.ixming.android.cache.utils;
+package com.frameworkexample.android.cache.utils;
 
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import org.ixming.android.cache.BitmapConstants;
-import org.ixming.android.cache.LogUtils;
+import com.frameworkexample.android.cache.BitmapConstants;
+import com.frameworkexample.android.utils.LogUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,7 +16,7 @@ import android.graphics.BitmapFactory.Options;
 /**
  * 不同于 {@link SimpleBitmapResizer} 在拥有原Bitmap的情况下对之创建新的副本（需要缩放的情况下）；
  * <p/>
- * 而本类将着眼于加载Bitmap之前的分析判断，根据需要的大小“恰当”地调整一些策略，使得加载速率有所提升，
+ * 本类将着眼于加载Bitmap之前的分析判断，根据需要的大小“恰当”地调整一些策略，使得加载速率有所提升，
  * 内存使用有所优化。
  * 
  * @author Yin Yong
@@ -143,19 +143,20 @@ public class PowerfulBitmapResizer {
 				rawWidth * rawHeight * BitmapUtils.byteCountOfPerPixel(decodeBounds.inPreferredConfig))) {
 			int targetWidth = transition.getTargetWidth();
 			int targetHeight = transition.getTargetHeight();
-			int inSampleSize = 1;
+			
 			float scaleFactorByWidth = ((float) targetWidth) / ((float) rawWidth);
 			float scaleFactorByHeight = ((float) targetHeight) / ((float) rawHeight);
 			float scaleFactor = Math.min(scaleFactorByWidth, scaleFactorByHeight);
 			
-			if (scaleFactor < 1.0F) {
-				//TODO offset value，如果xx.9，则认为能够晋升为xx + 1
-				double OFFSET = 0.05;
-				//TODO 如果大小比率小于1.0，则可能需要根据scaleFactor判断，能不能在加载时就执行缩放
-				inSampleSize = Math.max(1, (int) (1D / scaleFactor + OFFSET));
-			}
-			if (decodeBounds.inSampleSize < 1) {
+			if (decodeBounds.inSampleSize <= 1) {
 				//TODO if user does not set
+				int inSampleSize = 1;
+				if (scaleFactor < 1.0F) {
+					//TODO offset value，如果xx.9，则认为能够晋升为xx + 1
+					double OFFSET = 0.05;
+					//TODO 如果大小比率小于1.0，则可能需要根据scaleFactor判断，能不能在加载时就执行缩放
+					inSampleSize = Math.max(1, (int) (1D / scaleFactor + OFFSET));
+				}
 				decodeBounds.inSampleSize = inSampleSize;
 			}
 			return true;

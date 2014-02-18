@@ -1,4 +1,4 @@
-package org.ixming.android.cache;
+package com.frameworkexample.android.utils;
 
 import android.util.Log;
 

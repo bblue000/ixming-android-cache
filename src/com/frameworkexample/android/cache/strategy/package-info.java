@@ -1,13 +1,4 @@
-package org.ixming.android.cache.strategy;
-
-import android.graphics.drawable.Drawable;
-import android.view.View;
-
 /**
- * “显示策略”的接口；
- * 
- * <p/>
- * 
  * 显示“策略”，是如何将图片设置到View中的一种抽象；
  * 
  * <p/>
@@ -18,13 +9,8 @@ import android.view.View;
  * 
  * 以及其他用户自定义的设置图片的方式。
  * 
- * @author Yin Yong
+ * <p/>
+ * 
+ * 本包中提供了部分通用的实现。
  */
-public interface IDisplayStrategy {
-
-	/**
-	 * 将 {@code drawable} 设置到相应的View中显示
-	 */
-	public void display(View view, Drawable drawable);
-	
-}
+package com.frameworkexample.android.cache.strategy;

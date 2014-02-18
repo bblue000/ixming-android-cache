@@ -1,9 +1,10 @@
-package org.ixming.android.cache;
+package com.frameworkexample.android.cache;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
 
-import org.ixming.android.cache.utils.BitmapUtils;
+import com.frameworkexample.android.cache.utils.BitmapUtils;
+import com.frameworkexample.android.utils.LogUtils;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

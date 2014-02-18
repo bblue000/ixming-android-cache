@@ -1,8 +1,8 @@
-package org.ixming.android.cache.utils;
+package com.frameworkexample.android.cache.utils;
 
 import java.util.LinkedList;
 
-import org.ixming.android.cache.BitmapConstants;
+import com.frameworkexample.android.cache.BitmapConstants;
 
 import android.graphics.Bitmap;
 
@@ -11,6 +11,30 @@ import android.graphics.Bitmap;
  * 需要使用到这个类。
  * <p/>
  * 该类包含了一些参数设定，概念区分等。
+ * <p/>
+ * 参数包括：<br/>
+ * <table border="1px black" style="width:100%">
+ * 	<tr style="text-align:center; font-weight: bold; background-color: #CCC">
+ * 		<td>参数</td><td>含义</td>
+ * 	</tr>
+ * 	<tr>
+ * 		<td>{@link #setRecycleSrc(boolean)}</td><td>操作完成后，是否回收原Bitmap</td>
+ * 	</tr>
+ * 	<tr>
+ * 		<td>{@link #setResizeMode(ResizeMode)}</td><td>设置调整大小的模式，见{@link ResizeMode}</td>
+ * 	</tr>
+ * 	<tr>
+ * 		<td>{@link #setTargetSize(int, int)}</td><td>根据目标像素大小调整加载Bitmap的大小</td>
+ * 	</tr>
+ * 	<tr>
+ * 		<td>{@link #setTargetMemSize(long)}</td><td>根据目标内存大小调整加载Bitmap的大小</td>
+ * 	</tr>
+ * 	<tr>
+ * 		<td>{@link #setScaleFactor(float)}</td><td>根据指定的缩放比率调整加载Bitmap的大小</td>
+ * 	</tr>
+ * </table>
+ * <br/>
+ * <b>注意：</b>调整Bitmap大小的方式是互斥的，只能保留最新设置
  * <p/>
  * 通过 {@link #obtain()} 方法获取实例。
  * 
@@ -45,10 +69,10 @@ public class BitmapTransition {
 	private boolean mRecycleSrc;
 	
 	private static final int UNDEFINED = -1;
-	private long mTargetMemSize = UNDEFINED;
-	private int mTargetWidth = UNDEFINED;
-	private int mTargetHeight = UNDEFINED;
-	private float mScaleFactor = UNDEFINED;
+	private long mTargetMemSize;
+	private int mTargetWidth;
+	private int mTargetHeight;
+	private float mScaleFactor;
 	private BitmapTransition() {
 		reset();
 	}
@@ -118,7 +142,10 @@ public class BitmapTransition {
 		return this;
 	}
 	
-	public boolean getRecycleSrc() {
+	/**
+	 * 默认为false
+	 */
+	public boolean isRecycleSrc() {
 		checkIsRecycledInternal();
 		return mRecycleSrc;
 	}
@@ -173,11 +200,9 @@ public class BitmapTransition {
 	
 	
 	/**
-	 * 根据当前的设置，设置原始Bitmap的rawWidth，rawHeight；
-	 * 
 	 * 该方法由机制内部使用，外部不必要访问
 	 * 
-	 * @return 如果根据当前的设置，根据原始Bitmap的rawWidth，rawHeight进行判断后，发现需要改变大小，则返回true
+	 * @return 如果根据当前的BitmapTransition，以及原始Bitmap的rawWidth，rawHeight进行判断后，发现需要改变大小，则返回true
 	 */
 	/*package*/ boolean checkResizableWithSrc(Bitmap src) {
 		int rawWidth = src.getWidth();
@@ -186,11 +211,9 @@ public class BitmapTransition {
 	}
 	
 	/**
-	 * 根据当前的设置，设置原始Bitmap的rawWidth，rawHeight；
-	 * 
 	 * 该方法由机制内部使用，外部不必要访问
 	 * 
-	 * @return 如果根据当前的设置，根据原始Bitmap的rawWidth，rawHeight进行判断后，发现需要改变大小，则返回true
+	 * @return 如果根据当前的BitmapTransition，以及原始Bitmap的rawWidth，rawHeight进行判断后，发现需要改变大小，则返回true
 	 */
 	/*package*/ boolean checkResizableWithSrc(int rawWidth, int rawHeight, long srcMemSize) {
 		checkIsRecycledInternal();

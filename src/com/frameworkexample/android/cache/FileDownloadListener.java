@@ -1,4 +1,4 @@
-package org.ixming.android.cache;
+package com.frameworkexample.android.cache;
 
 public interface FileDownloadListener {
 

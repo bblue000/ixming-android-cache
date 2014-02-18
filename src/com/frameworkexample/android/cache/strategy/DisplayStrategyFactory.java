@@ -1,4 +1,4 @@
-package org.ixming.android.cache.strategy;
+package com.frameworkexample.android.cache.strategy;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

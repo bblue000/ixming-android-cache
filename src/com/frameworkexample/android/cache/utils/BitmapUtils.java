@@ -1,4 +1,4 @@
-package org.ixming.android.cache.utils;
+package com.frameworkexample.android.cache.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -8,8 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import org.ixming.android.cache.BitmapConstants;
-import org.ixming.android.cache.LogUtils;
+import com.frameworkexample.android.cache.BitmapConstants;
+import com.frameworkexample.android.utils.LogUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

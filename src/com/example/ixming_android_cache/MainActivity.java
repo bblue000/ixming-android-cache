@@ -1,10 +1,11 @@
 package com.example.ixming_android_cache;
 
-import org.ixming.android.cache.strategy.DisplayStrategyFactory;
-import org.ixming.android.cache.strategy.SimpleImageViewDisplayStrategy;
 import org.ixming.android.inject.InjectorUtils;
 import org.ixming.android.inject.annotation.ViewInject;
 import org.ixming.utils.NumberUtils;
+
+import com.frameworkexample.android.cache.strategy.DisplayStrategyFactory;
+import com.frameworkexample.android.cache.strategy.SimpleImageViewDisplayStrategy;
 
 import android.app.Activity;
 import android.os.Bundle;

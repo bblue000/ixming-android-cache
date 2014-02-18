@@ -1,6 +1,6 @@
-package org.ixming.android.cache.utils;
+package com.frameworkexample.android.cache.utils;
 
-import org.ixming.android.cache.LogUtils;
+import com.frameworkexample.android.utils.LogUtils;
 
 import android.graphics.Bitmap;
 
@@ -29,7 +29,7 @@ public class SimpleBitmapResizer {
 							transition.getTargetWidth(),
 							transition.getTargetHeight(), true);
 					//TODO 当宽高和原先一致时，会直接返回当前src，此时，不应当recycle
-					if (src != target && transition.getRecycleSrc()) {
+					if (src != target && transition.isRecycleSrc()) {
 						src.recycle();
 					}
 					return target;
@@ -54,7 +54,7 @@ public class SimpleBitmapResizer {
 	public static byte[] toByteArrayAndResize(Bitmap src, BitmapTransition transition) {
 		transition = BitmapTransition.checkValue(transition);
 		Bitmap resizedSrc = resizeBitmap(src, transition);
-		return BitmapUtils.bmpToByteArray(resizedSrc, (transition.getRecycleSrc() || resizedSrc != src));
+		return BitmapUtils.bmpToByteArray(resizedSrc, (transition.isRecycleSrc() || resizedSrc != src));
 	}
 	
 }
